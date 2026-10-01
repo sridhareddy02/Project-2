@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "seed": 21,
+    "customers": 17550,
+    "orders": 66884,
+    "months": 36
+  },
+  "findings": [
+    "Champions are 23% of customers but 54% of revenue to date, and 57% of them buy again within 90 days, against 5% for Hibernating customers.",
+    "K-means on log recency, frequency and monetary value picks 4 clusters and agrees weakly with the four hidden behavioural segments (adjusted Rand index 0.13; 0.13 when forced to 4): spend and frequency overlap between segments.",
+    "Retention settles near 13% of a cohort ordering in a given month a year after acquisition (month 1: 18%).",
+    "The churn model, trained on 2024-06-30 and tested on 2025-06-30, reaches AUC 0.70 (logistic regression) and 0.69 (tuned gradient boosting); the riskiest decile churns at 80% versus 57% overall.",
+    "Predicted six-month value beats a run-rate baseline: MAE 59 versus 90, and the top decile captures 44% of future revenue versus 35%.",
+    "Holt-Winters forecasts the held-out six months with a MAPE of 1.9%, against 17.3% for a naive forecast.",
+    "The win-back test measured +2.47 pp (95% CI 1.49 to 3.45, p < 0.001); the Bayesian probability that the offer helps is 100%. 2 of 4 channels show a lift on their own after false-discovery correction, and a formal interaction test finds no evidence that the effect differs by channel (p = 0.51).",
+    "The testing method checks out in simulation: 5.1% false positives on A/A tests (target 5%), 95.2% interval coverage, and simulated power 98% versus 98% from the formula."
+  ],
+  "segments": [
+    {
+      "segment": "Champions",
+      "customers": 3268,
+      "revenue_to_date": 1614907.8338855968,
+      "avg_orders": 7.2668298653610774,
+      "avg_recency_days": 40.93023255813954,
+      "repurchase_rate_90d": 0.5685434516523867,
+      "revenue_next_6m": 517049.00030618504,
+      "customer_share": 0.23054673721340388,
+      "revenue_share": 0.5428213108198656
+    },
+    {
+      "segment": "Loyal",
+      "customers": 2853,
+      "revenue_to_date": 602764.2230051316,
+      "avg_orders": 3.552751489660007,
+      "avg_recency_days": 116.00105152471083,
+      "repurchase_rate_90d": 0.354714335786891,
+      "revenue_next_6m": 214875.09522158015,
+      "customer_share": 0.20126984126984127,
+      "revenue_share": 0.20260801191341693
+    },
+    {
+      "segment": "Promising",
+      "customers": 1329,
+      "revenue_to_date": 78018.56837984429,
+      "avg_orders": 1.0,
+      "avg_recency_days": 54.55605718585402,
+      "repurchase_rate_90d": 0.30248306997742663,
+      "revenue_next_6m": 82908.63905749613,
+      "customer_share": 0.09375661375661376,
+      "revenue_share": 0.02622449446810756
+    },
+    {
+      "segment": "Needs attention",
+      "customers": 1055,
+      "revenue_to_date": 59852.59276019667,
+      "avg_orders": 1.0,
+      "avg_recency_days": 160.39526066350712,
+      "repurchase_rate_90d": 0.1819905213270142,
+      "revenue_next_6m": 35757.88046867348,
+      "customer_share": 0.07442680776014109,
+      "revenue_share": 0.020118338753664845
+    },
+    {
+      "segment": "At risk",
+      "customers": 2384,
+      "revenue_to_date": 442573.5469437901,
+      "avg_orders": 3.3125,
+      "avg_recency_days": 432.1459731543624,
+      "repurchase_rate_90d": 0.09018456375838926,
+      "revenue_next_6m": 37495.4308938014,
+      "customer_share": 0.16818342151675486,
+      "revenue_share": 0.1487628877916784
+    },
+    {
+      "segment": "Hibernating",
+      "customers": 3286,
+      "revenue_to_date": 176909.82608995613,
+      "avg_orders": 1.0,
+      "avg_recency_days": 534.6664637857577,
+      "repurchase_rate_90d": 0.05447352404138771,
+      "revenue_next_6m": 27380.095174831426,
+      "customer_share": 0.23181657848324516,
+      "revenue_share": 0.05946495625326654
+    }
+  ],
+  "kmeans": {
+    "k": 4,
+    "ari": 0.1347908832429297,
+    "ari_k4": 0.1347908832429297,
+    "silhouette": [
+      {
+        "k": 3,
+        "inertia": 15867.54533640898,
+        "silhouette": 0.3759594273552852
+      },
+      {
+        "k": 4,
+        "inertia": 11481.189975492354,
+        "silhouette": 0.3826237309610024
+      },
+      {
+        "k": 5,
+        "inertia": 9622.44768280392,
+        "silhouette": 0.36521117665518515
+      },
+      {
+        "k": 6,
+        "inertia": 8277.303060831326,
+        "silhouette": 0.34213270836885185
+      },
+      {
+        "k": 7,
+        "inertia": 7408.130181633859,
+        "silhouette": 0.3243328276489262
+      }
+    ]
+  },
+  "retention_curve": {
+    "0": 1.0,
+    "1": 0.1783,
+    "2": 0.1747,
+    "3": 0.167,
+    "4": 0.1677,
+    "5": 0.1617,
+    "6": 0.1618,
+    "7": 0.154,
+    "8": 0.1484,
+    "9": 0.1484,
+    "10": 0.15,
+    "11": 0.1368,
+    "12": 0.1338,
+    "13": 0.1311,
+    "14": 0.133,
+    "15": 0.1299,
+    "16": 0.1283,
+    "17": 0.1276,
+    "18": 0.1229,
+    "19": 0.121,
+    "20": 0.1153,
+    "21": 0.1102,
+    "22": 0.113,
+    "23": 0.1104,
+    "24": 0.0981
+  },
+  "churn": {
+    "metrics": {
+      "logistic_regression": {
+        "roc_auc": 0.7023320682165142,
+        "average_precision": 0.7310200033006521,
+        "top_decile_churn_rate": 0.8015978695073236,
+        "top_decile_lift": 1.4136108839082695
+      },
+      "gradient_boosting": {
+        "roc_auc": 0.6934383830232262,
+        "average_precision": 0.7231462651201194,
+        "top_decile_churn_rate": 0.8135818908122503,
+        "top_decile_lift": 1.4347446014417817
+      }
+    },
+    "base_rate": 0.5670569451836083,
+    "gb_params": {
+      "max_depth": 2,
+      "n_estimators": 200,
+      "validation_auc": 0.7002880968126914
+    },
+    "n_train": 5102,
+    "n_test": 7516
+  },
+  "value": {
+    "model": {
+      "mae": 58.79199712243802,
+      "rmse": 99.05552105855854,
+      "spearman": 0.5701467739677666,
+      "top_decile_revenue_capture": 0.43974172108786386
+    },
+    "baseline": {
+      "mae": 89.52912192928058,
+      "rmse": 142.2907435849628,
+      "spearman": 0.5266296424875234,
+      "top_decile_revenue_capture": 0.3485765613504139
+    }
+  },
+  "forecast_mape": {
+    "Holt-Winters": 0.019468203492278225,
+    "Seasonal naive (growth adjusted)": 0.20345188481919899,
+    "Naive (last month)": 0.1734408863035948
+  },
+  "experiment": {
+    "population": 5670,
+    "baseline_rate": 0.026807760141093474,
+    "true_effect": 0.02,
+    "n_treatment": 2835,
+    "n_control": 2835,
+    "primary": {
+      "rate_treatment": 0.04938271604938271,
+      "rate_control": 0.024691358024691357,
+      "absolute_lift": 0.024691358024691357,
+      "relative_lift": 1.0,
+      "z": 4.922475924854202,
+      "p_value": 8.545608032708304e-07,
+      "ci_low": 0.014881121036231395,
+      "ci_high": 0.034501595013151316
+    },
+    "bayesian": {
+      "prob_treatment_better": 1.0,
+      "expected_absolute_lift": 0.02465477149566571,
+      "credible_low": 0.01488972854957289,
+      "credible_high": 0.034616726144087936
+    },
+    "srm": {
+      "chi2": 0.0,
+      "p_value": 1.0,
+      "ok": true
+    },
+    "revenue_plain": {
+      "difference": 0.9651909386367352,
+      "se": 0.33191748930888637,
+      "p_value": 0.003652534539546787,
+      "ci_low": 0.31450520816741045,
+      "ci_high": 1.61587666910606
+    },
+    "revenue_cuped": {
+      "difference": 0.9612667242552335,
+      "se": 0.33159640855543526,
+      "p_value": 0.003759096800895984,
+      "ci_low": 0.3112104263564307,
+      "ci_high": 1.6113230221540364
+    },
+    "cuped_theta": 0.004627025365852473,
+    "cuped_variance_reduction": 0.0019429743580711145,
+    "interaction_test": {
+      "lr_statistic": 2.2940971098385035,
+      "df": 3,
+      "p_value": 0.5136526871725773
+    },
+    "planned_n_per_arm": 1391,
+    "power_with_available_n": 0.9794265355142132,
+    "mde_with_available_n": 0.013386980540049635
+  },
+  "experiment_by_channel": [
+    {
+      "channel": "organic",
+      "n": 1502,
+      "absolute_lift": 0.0284119439106744,
+      "ci_low": 0.00835639004773052,
+      "ci_high": 0.04846749777361828,
+      "p_value": 0.0060419148419331185,
+      "q_value": 0.012083829683866237
+    },
+    {
+      "channel": "paid_search",
+      "n": 1723,
+      "absolute_lift": 0.035041074181481044,
+      "ci_low": 0.01695524038457071,
+      "ci_high": 0.05312690797839138,
+      "p_value": 0.00016881298059098556,
+      "q_value": 0.0006752519223639423
+    },
+    {
+      "channel": "paid_social",
+      "n": 1890,
+      "absolute_lift": 0.013051501275571652,
+      "ci_low": -0.00243728335300316,
+      "ci_high": 0.028540285904146465,
+      "p_value": 0.09723867421277546,
+      "q_value": 0.12965156561703395
+    },
+    {
+      "channel": "referral",
+      "n": 555,
+      "absolute_lift": 0.02057607819689604,
+      "ci_low": -0.012799319718435884,
+      "ci_high": 0.05395147611222796,
+      "p_value": 0.22418232706494667,
+      "q_value": 0.22418232706494667
+    }
+  ],
+  "validation": {
+    "aa_false_positive_rate": 0.05075,
+    "aa_ci_coverage": 0.94925,
+    "ab_simulated_power": 0.98475,
+    "ab_ci_coverage": 0.952,
+    "ab_analytic_power": 0.9794265355142132,
+    "reps": 4000
+  }
+}
